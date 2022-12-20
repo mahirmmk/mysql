@@ -1,8 +1,9 @@
 const Product= require("../models/productModel")
+const User = require("../models/userModel")
 
 
 const getAllProducts=(req, res)=>{
-    Product.findAll().then((data)=>{
+    Product.findAll({include:[{model:User}]}).then((data)=>{
         res.json({
             message:"fetched all Product",
             data:data
@@ -23,7 +24,8 @@ const createProduct= (req, res)=>{
     let product={
         title:req.body.title,
         price:req.body.price,
-        category:req.body.category
+        category:req.body.category,
+        userId:req.body.userId
     }
     Product.create(product).then((success)=>{
         res.json({

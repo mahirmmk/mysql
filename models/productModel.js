@@ -1,7 +1,8 @@
 const sequelize= require("../utils/databaseConfig")
 const {DataTypes} =require("sequelize")
+const User= require("../models/userModel")
 
-const User= sequelize.define("user", {
+const Product= sequelize.define("Product", {
     id:{
         type:DataTypes.INTEGER,
         autoIncrement:true,
@@ -10,7 +11,11 @@ const User= sequelize.define("user", {
     },
     title:{type:DataTypes.STRING, allowNull:false},
     price:{type:DataTypes.FLOAT, allowNull:false},
-    category:{type:DataTypes.STRING}
-})
+    category:{type:DataTypes.STRING},
+    
+}, )
 
-module.exports=User
+
+Product.belongsTo(User)
+
+module.exports=Product
